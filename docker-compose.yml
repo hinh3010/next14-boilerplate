@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:8.3.0
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: pages-builder
+            MYSQL_USER: hinhtv
+            MYSQL_PASSWORD: hinhtv
+        ports:
+            - '3306:3306'
+        volumes:
+            - data:/var/lib/mysql
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:5.2.1
+        restart: always
+        environment:
+            PMA_HOST: db
+            MYSQL_ROOT_PASSWORD: root
+        ports:
+            - '8080:80'
+
+volumes:
+    data:
